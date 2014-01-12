@@ -14,10 +14,9 @@ from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 from google.appengine.api import urlfetch
+from app import request
 
-from models import *
-import request
-import defs
+from app.models import *
 
 # -----------------------------------------------------------------------------
 # Constants
