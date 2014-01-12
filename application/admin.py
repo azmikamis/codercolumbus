@@ -2,11 +2,8 @@ from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
 from auth import requires_auth
 from models import Post
-
 from wtforms.ext.appengine.db import model_form
-
-admin = Blueprint('admin', __name__, template_folder='templates')
-
+from slugify import slugify
 
 admin = Blueprint('admin', __name__, template_folder='templates')
 
@@ -25,17 +22,17 @@ class Detail(MethodView):
     decorators = [requires_auth]
 
     def get_context(self, slug=None):
-        ##form_cls = model_form(Post, exclude=('created_at', 'comments'))
-        form_cls = model_form(Post)
+        postform = model_form(Post, exclude='slug')
+
         if slug:
-            post = Post.get(slug=slug)
+            post = Post.all().filter('slug =', slug).get()
             if request.method == 'POST':
-                form = form_cls(request.form, inital=post._data)
+                form = postform(request.form, inital=post._data)
             else:
-                form = form_cls(obj=post)
+                form = postform(obj=post)
         else:
-            post = Post(title='Untitled', content='Empty')
-            form = form_cls(request.form)
+            post = Post(title='Untitled', content='Empty', slug='Empty')
+            form = postform(request.form)
 
         context = {
             "post": post,
@@ -46,7 +43,6 @@ class Detail(MethodView):
 
     def get(self, slug):
         context = self.get_context(slug)
-        print context
         return render_template('admin/detail.html', **context)
 
     def post(self, slug):
@@ -56,6 +52,7 @@ class Detail(MethodView):
         if form.validate():
             post = context.get('post')
             form.populate_obj(post)
+            post.slug = slugify(post.title)
             post.put()
 
             return redirect(url_for('admin.index'))

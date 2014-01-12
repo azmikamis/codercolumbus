@@ -13,6 +13,6 @@ skip_files:
 
 handlers:
 - url: /.*
-  script: runapp.app.app
+  script: runapp.app
 
 

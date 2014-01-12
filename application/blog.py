@@ -2,21 +2,21 @@ from flask import Blueprint, render_template
 from flask.views import MethodView
 from models import Post
 
-posts = Blueprint('posts', __name__)
+blog = Blueprint('blog', __name__)
 
 
-class ListView(MethodView):
+class List(MethodView):
 
     def get(self):
         posts = Post.all()
         return render_template('posts/list.html', posts=posts)
 
 
-class DetailView(MethodView):
+class Detail(MethodView):
 
     def get(self, slug):
-        post = Post.get(slug=slug)
+        post = Post.all().filter('slug =', slug).get()
         return render_template('posts/detail.html', post=post)
 
-posts.add_url_rule('/', view_func=ListView.as_view('list'))
-posts.add_url_rule('/<slug>/', view_func=DetailView.as_view('detail'))
+blog.add_url_rule('/', view_func=List.as_view('list'))
+blog.add_url_rule('/<slug>/', view_func=Detail.as_view('detail'))

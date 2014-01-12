@@ -9,7 +9,7 @@
 
 {% block content %}
   <p>{{ post.body }}<p>
-  <p>{{ post.created_at.strftime('%H:%M %Y-%m-%d') }}</p>
+  <p>{{ post.publishdate.strftime('%H:%M %Y-%m-%d') }}</p>
   <hr>
   <h2>Comments</h2>
   {% if post.comments %}

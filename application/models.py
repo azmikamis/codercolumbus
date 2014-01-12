@@ -11,6 +11,7 @@ FETCH_THEM_ALL = ((sys.maxint - 1) >> 32) & 0xffffffff
 
 class Post(db.Model):
     title = db.StringProperty(required=True)
+    slug = db.StringProperty(required=True)
     content = db.TextProperty(required=True)
     publishdate = db.DateTimeProperty(auto_now_add=True)
 
