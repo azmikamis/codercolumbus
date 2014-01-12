@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{%- block topbar -%}
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <h1>
+        <a href="{{ url_for('admin.index') }}" class="brand">Coder Columbus Admin</a>
+      </h1>
+    </div>
+    <div class="navbar-collapse collapse">
+      <form class="navbar-form navbar-right" role="form">
+        <a href="{{ url_for('admin.create') }}" class="btn btn-primary btn-lg">Create new post</a>
+      </form>
+    </div>
+  </div>
+</div>
+{%- endblock -%}

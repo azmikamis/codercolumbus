@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <div>
+    {% if True %}
+      Hello {{ name }}!
+    {% endif %}
+  </div>
+  <div>
+      <ul>
+      {% for item in seq %}
+        <li>{{ item }}</li>
+      {% endfor %}
+      </ul>
+  </div>
+  <div>
+      <ul>
+      # for item in seq:
+        <li>{{ item }}</li>
+      # endfor
+      </ul>
+  </div>
+</body>
+</html>

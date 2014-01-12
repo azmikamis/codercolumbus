@@ -2,15 +2,17 @@ application: codercolumbus
 version: 1
 runtime: python27
 api_version: 1
-threadsafe: no
+threadsafe: yes
+
+
+skip_files:
+- ^(.*/)?.*\.py[co]
+- ^\.gitignore
+- ^\.git/.*
+- ^\.idea/.*
 
 handlers:
-- url: /static
-  static_dir: static
+- url: /.*
+  script: runapp.app.app
 
-- url: /admin
-  script: admin.py
-
-- url: /admin/.*
-  script: admin.py
 
