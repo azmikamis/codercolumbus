@@ -12,7 +12,7 @@
     {% for post in posts %}
     <div class="row">
         <div class="col-md-3"><a href="{{ url_for('admin.edit', slug=post.slug) }}">{{ post.title }}</a></div>
-        <div class="col-md-3">{{ post.publishdate.strftime('%Y-%m-%d') }}</div>
+        <div class="col-md-3">{{ post.datecreated.strftime('%Y-%m-%d') }}</div>
         <div class="col-md-3">{{ post.key().id() }}</div>
         <div class="col-md-3"><a href="{{ url_for('admin.edit', slug=post.slug) }}" class="btn primary">Edit</a></div>
     </div>

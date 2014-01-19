@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for post in posts %}
+    <article>
+      <header>
+        <h1>
+          <a href="{{ url_for('blog.detail', slug=post.slug) }}">{{ post.title }}</a>
+        </h1>
+      </header>
+      <footer>
+          <span>posted in <a href="#">category</a></span>
+          <span>on <a href="#">{{ post.datecreated.strftime('%H:%M %Y-%m-%d') }}</a></span>
+      </footer>
+      <p>{{ post.body|truncate(100) }}</p>
+      <p>
+        {{ post.datecreated.strftime('%H:%M %Y-%m-%d') }} |
+        {% with total=post.comments|length %}
+            {{ total }} comment {%- if total > 1 %}s{%- endif -%}
+        {% endwith %}
+      </p>
+    </article>
+    {% endfor %}
+{% endblock %}

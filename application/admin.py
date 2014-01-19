@@ -9,11 +9,11 @@ admin = Blueprint('admin', __name__, template_folder='templates')
 
 
 class List(MethodView):
+
     decorators = [requires_auth]
-    cls = Post
 
     def get(self):
-        posts = self.cls.all()
+        posts = Post.all()
         return render_template('admin/list.html', posts=posts)
 
 
@@ -22,12 +22,12 @@ class Detail(MethodView):
     decorators = [requires_auth]
 
     def get_context(self, slug=None):
-        postform = model_form(Post, exclude='slug')
+        postform = model_form(Post, exclude='slug, datepublished')
 
         if slug:
             post = Post.all().filter('slug =', slug).get()
             if request.method == 'POST':
-                form = postform(request.form, inital=post._data)
+                form = postform(request.form, inital=post._entity)
             else:
                 form = postform(obj=post)
         else:
@@ -54,12 +54,10 @@ class Detail(MethodView):
             form.populate_obj(post)
             post.slug = slugify(post.title)
             post.put()
+            return redirect(url_for('admin.list'))
 
-            return redirect(url_for('admin.index'))
         return render_template('admin/detail.html', **context)
 
-
-# Register the urls
-admin.add_url_rule('/admin/', view_func=List.as_view('index'))
+admin.add_url_rule('/admin/', view_func=List.as_view('list'))
 admin.add_url_rule('/admin/create/', defaults={'slug': None}, view_func=Detail.as_view('create'))
 admin.add_url_rule('/admin/<slug>/', view_func=Detail.as_view('edit'))

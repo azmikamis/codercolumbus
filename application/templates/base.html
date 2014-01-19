@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coder Columbus</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pygmentize.css') }}">
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans|Baumans'>
     <style>.content {padding-top: 80px;}</style>
   </head>
 
   <body>
 
-    {%- block topbar -%}
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <h1>
-            <a href="/" class="brand">Coder Columbus</a> <small>A Programmer Explores...</small>
-          </h1>
-        </div>
-      </div>
-    </div>
+    {%- block header -%}
+    <header>
+      <h1>
+        <a href="/" class="brand">Coder Columbus</a>
+      </h1>
+      <p>A Programmer Explores...</p>
+      <nav>
+        <ul>
+          <li><a href="javascript:void(0)">Home</a></li>
+          <li><a href="javascript:void(0)">Porfolio</a></li>
+          <li><a href="javascript:void(0)">About</a></li>
+          <li><a href="javascript:void(0)">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
     {%- endblock -%}
+
+    <section id="spacer">
+    </section>
 
     <div class="container">
       <div class="content">

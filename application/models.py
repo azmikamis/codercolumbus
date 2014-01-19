@@ -13,7 +13,9 @@ class Post(db.Model):
     title = db.StringProperty(required=True)
     slug = db.StringProperty(required=True)
     content = db.TextProperty(required=True)
-    publishdate = db.DateTimeProperty(auto_now_add=True)
+    datepublished = db.DateTimeProperty()
+    datecreated = db.DateTimeProperty(auto_now_add=True)
+    datemodified = db.DateTimeProperty(auto_now=True)
 
 
 

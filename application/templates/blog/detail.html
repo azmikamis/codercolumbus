@@ -8,14 +8,14 @@
 {% endblock %}
 
 {% block content %}
-  <p>{{ post.body }}<p>
-  <p>{{ post.publishdate.strftime('%H:%M %Y-%m-%d') }}</p>
+  <p>{{ post.content|safe }}<p>
+  <p>{{ post.datecreated.strftime('%H:%M %Y-%m-%d') }}</p>
   <hr>
   <h2>Comments</h2>
   {% if post.comments %}
     {% for comment in post.comments %}
        <p>{{ comment.body }}</p>
-       <p><strong>{{ comment.author }}</strong> <small>on {{ comment.created_at.strftime('%H:%M %Y-%m-%d') }}</small></p>
+       <p><strong>{{ comment.author }}</strong> <small>on {{ comment.datepublished.strftime('%H:%M %Y-%m-%d') }}</small></p>
       {{ comment.text }}
     {% endfor %}
   {% endif %}
